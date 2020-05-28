@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Truth or Dare</title>
+</head>
+<body>
+<div>
+    <h1> Login </h1>
+    <form action="/login" method="POST">
+        <input type="text" placeholder="email" name="emaillogin" value="pippo@pippo.com">
+        <input type="text" placeholder=" password" name="passwordlogin" value="pippo">
+        <button type="submit">Login</button>
+    </form>
+    <hr>
+    <p>if you are not register, click on this button</p>
+    <form action="/turnpage" method="GET">
+        <button type="submit">Register now</button>
+    </form>
+
+</div>
+<div>
+    <h4 > result: <%= data.status %> </h4>
+</div>
+</body>
+</html>

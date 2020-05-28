@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Registration</title>
+</head>
+<body>
+<div>
+    <h1> Register new user </h1>
+    <form action="/register" method="POST">
+        <input type="text" placeholder="name" name="name">
+        <input type="text" placeholder="email" name="email">
+        <input type="text" placeholder=" password" name="password">
+        <button type="submit">Submit</button>
+    </form>
+    <hr>
+</div>
+
+<div>
+    <h4 > result: <%= data.status %> </h4>
+</div>
+</body>
+</html>

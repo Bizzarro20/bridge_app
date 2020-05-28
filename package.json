@@ -1,0 +1,30 @@
+{
+  "name": "bridge_app",
+  "version": "1.0.0",
+  "description": "used as a bridge with the jwt_app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Navjot",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bizzarro20/Bridge_app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Bizzarro20/Bridge_app/issues"
+  },
+  "homepage": "https://github.com/Bizzarro20/Bridge_app#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^3.1.3",
+    "express": "^4.17.1",
+    "mongodb": "^3.5.8",
+    "request": "^2.88.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
