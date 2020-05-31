@@ -6,16 +6,15 @@
 </head>
 <body>
 <div>
-    <h1> Register new user </h1>
-    <form action="/register" method="POST">
-        <input type="text" placeholder="name" name="name">
+    <h1> Register new pub </h1>
+    <form action="/pub_register" method="POST">
+        <input type="text" placeholder="ditta" name="ditta">
         <input type="text" placeholder="email" name="email">
         <input type="text" placeholder=" password" name="password">
         <button type="submit">Submit</button>
     </form>
     <hr>
 </div>
-
 <div>
     <h4 > result: <%= data.status %> </h4>
 </div>

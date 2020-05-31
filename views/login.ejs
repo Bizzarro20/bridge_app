@@ -2,19 +2,36 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Truth or Dare</title>
+    <title>DrinkAdvisor</title>
 </head>
 <body>
 <div>
-    <h1> Login </h1>
-    <form action="/login" method="POST">
-        <input type="text" placeholder="email" name="emaillogin" value="pippo@pippo.com">
-        <input type="text" placeholder=" password" name="passwordlogin" value="pippo">
+    <h1> Login Utenti </h1>
+    <form action="/user_login" method="POST">
+        <input type="text" placeholder="email" name="emaillogin">
+        <input type="text" placeholder=" password" name="passwordlogin">
         <button type="submit">Login</button>
     </form>
     <hr>
-    <p>if you are not register, click on this button</p>
-    <form action="/turnpage" method="GET">
+<div/>
+<div>
+    <h1> Login Pub </h1>
+    <form action="/pub_login" method="POST">
+        <input type="text" placeholder="email" name="emaillogin">
+        <input type="text" placeholder=" password" name="passwordlogin">
+        <button type="submit">Login</button>
+    </form>
+    <hr>
+</div>
+
+
+    <p>if you are not register user, click on this button</p>
+    <form action="/userRegistration" method="GET">
+        <button type="submit">Register now</button>
+    </form>
+
+    <p>if you are not register pub, click on this button</p>
+    <form action="/pubRegistration" method="GET">
         <button type="submit">Register now</button>
     </form>
 
