@@ -6,28 +6,32 @@ var request = require("request");
 
 
 const mongodb_connection_string = "mongodb+srv://Bizzarro20:ProgettoWeb@cluster0-sr8wq.mongodb.net/DrinkAdvisor?retryWrites=true&w=majority"
-/*
-function get_latlon(city){
-    let connAPI = `YOURAPI`
-    return new Promise(function (resolve, reject) {
+
+function get_drink(drink){
+    let connAPI = `https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${drink}`
+    return new Promise(function (result, reject) {
         request.get(connAPI, function (err,resp, body) {
             if (err){
                 reject(err);
             }else{
                 let res = JSON.parse(body);
                 if (res.total_results == 0) {
-                    resolve(-1)
+                    result(-1)
                 }else {
-                    res = res.results[0].annotations.DMS;
-                    let lat = res.lat;
-                    let lon = res.lng;
-                    resolve([lat, lon]);
+                    let a = [];
+                    for (let i = 0; i < res.drinks.length; i++) {
+                        a.push(res.drinks[i].strDrink);
+                        result(a);
+                    }
                 }
             }
         })
     })
 }
 
+
+
+/*
 function get_two_cities(city1, city2){
     let res1 = get_latlon(city1);
     let res2 = get_latlon(city2);
@@ -56,7 +60,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
         const db = client.db('DrinkAdvisor')
         const userCollection = db.collection('users') //!!!!!!!!!!
         const pubCollection = db.collection('pubs') //!!!!!!!!!!
-
+        const reviewCollection = db.collection('reviews');
 
         app.use(bodyParser.urlencoded({extended: true}));
         app.set('view engine', 'ejs')
@@ -80,6 +84,26 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             res.render('pub_registration.ejs', {data: {"status": " "}})
         });
 
+        app.post('/search_drink', (req,res) => {
+            console.log('=====================')
+            console.log(req.body)
+            console.log('=====================')
+            let searchdrink = req.body.searchdrink;
+            console.log(searchdrink);
+            let d = get_drink(searchdrink);
+            d.then(value => {
+                console.log("fatta!");
+                console.log(value);
+                res.render('user_page.ejs', {data: {"lista": value}});
+            }).catch(error => {
+                res.render('user_page.ejs', {data: {"lista": "errore"}})
+                console.log("nope!");
+                //console.log(error)
+            });
+            //console.log(res);
+            //res.render('user_page.ejs', {data: {"status": "tutto bene"}})
+
+        });
 
         app.post('/user_register', (req, res) => {
             console.log('=====================')
@@ -108,7 +132,6 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             }).then(value => {
                 console.log("fatta!");
                 console.log(value)
-
                 if (value.name == 'MongoError') {
                     res.render('homepage.ejs', {data: {"status": "Error on DB"}})
                     //res.redirect("/")
@@ -144,7 +167,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 "password": password
             };
             var promise = new Promise((resolve, reject) => {
-                request.post("http://localhost:3000/pubs", {json: dati},
+                request.post("http://localhost:3002/pubs", {json: dati},
                     (error, response, body) => {
                         if (error) {
                             //console.log("nope!");
@@ -179,7 +202,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
 
         });
 
-        app.post('/userlogin', (req, res) => {
+        app.post('/user_login', (req, res) => {
             console.log('=====================')
             console.log(req.body)
             console.log('=====================')
@@ -199,7 +222,9 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                     });
             }).then(value => {
                 console.log("fatta!");
+                /*
                 //console.log(value)
+
                 let token = value.token;
                 if (token) {
                     res.render('homepage.ejs', {data: {"status": token}})
@@ -208,8 +233,10 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                     res.render('login.ejs', {data: {"status": "error on login"}})
                     //res.redirect({data: {"status":token}},"/")
                 }
+*/
+                res.render('user_page.ejs', {data: {"status": ""}});
+                //window.location.replace('/user_page.ejs');
 
-                //res.redirect("/")
             })
                 .catch(error => {
                     res.render('login.ejs', {data: {"status": "errore"}})
@@ -232,7 +259,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 "password": password
             };
             var promise = new Promise((resolve, reject) => {
-                request.post("http://localhost:3000/pubs/login", {json: dati},
+                request.post("http://localhost:3002/pubs/login", {json: dati},
                     (error, response, body) => {
                         if (error) {
                             reject(error);
@@ -259,6 +286,42 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             });
 
 
+        });
+        app.post('/insert_review', (req, res) => {
+            console.log('=====================')
+            console.log(req.body)
+            console.log('=====================')
+            let user = req.body.user;
+            let pub = req.body.pub;
+            let drink = req.body.drink;
+            let rank = req.body.rank;
+            let dati = {
+                "timestamp": Date.now(),
+                "user": user,
+                "pub": pub,
+                "drink": drink,
+                "rank": rank
+            };
+            var promise = new Promise((resolve, reject) => {
+                request.post("http://localhost:3003/review", {json: dati},
+                    (error, response, body) => {
+                        if (error) {
+                            reject(error);
+                        }
+                        resolve(body);
+                    });
+            }).then(value => {
+                console.log("fatta!");
+                //console.log(value)
+                res.render('user_page.ejs', {data: {"status": "review saved"}});
+
+                //res.redirect("/")
+            }).catch(error => {
+                res.render('login.ejs', {data: {"status": "errore"}})
+                console.log("nope!");
+                //console.log(error)
+            })
         })
     }).catch(error => console.error(error));
+
 
