@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DrinkAdvisor</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+<div>
+    <div>
+        <h1> Catalogo drink </h1>
+        <form action="/show_my_drink" method="GET">
+            <button type="submit">Ottieni catalogo</button>
+        </form>
+    </div>
+    <div>
+        <h4 > result: <%= data.catalogo %> </h4>
+    </div>
+    <hr/>
+    <div>
+        <h1> cerca un drink </h1>
+        <form action="/search_drink" method="POST">
+            <input type="text" placeholder="search drink" name="searchdrink">
+            <button type="submit">insert review</button>
+        </form>
+        <hr>
+    </div>
+
+    <div>
+        <h1> inserisci un drink nel catalogo </h1>
+        <form action="/insert_drink_in_catalog" method="POST">
+            <input type="text" placeholder="search drink" name="searchdrink">
+            <button type="submit">insert review</button>
+        </form>
+        <hr>
+    </div>
+
+</div>
+<div>
+    <h4 > result: <%= data.status %> </h4>
+</div>
+</body>
+</html>

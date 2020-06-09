@@ -84,6 +84,19 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             res.render('pub_registration.ejs', {data: {"status": " "}})
         });
 
+        app.get('/show_my_drink', (req, res) => {
+            db.collection('pubs').find().toArray()
+                .then(results => {
+                    let a = [];
+                    for (let i = 0; i < results.length; i++)
+                    {
+                        a.push(results[i].ditta); //qui stamperò invece i drink del pub
+                    }
+                    res.render('pub_page.ejs', {data: {"catalogo": a}})
+                })
+                .catch(error => console.error(error))
+        });
+
         app.post('/search_drink', (req,res) => {
             console.log('=====================')
             console.log(req.body)
@@ -222,6 +235,17 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                     });
             }).then(value => {
                 console.log("fatta!");
+                user_token_value = value.token;
+                username = value.user;          //tutte le info sul user
+                console.log(username);
+                console.log(user_token_value);
+                if (value.token) {
+                    res.render('user_page.ejs', {data: {"status": ""}});
+                }else{
+                    res.render('login.ejs', {data: {"status": "error on login"}})
+                    //res.redirect({data: {"status":token}},"/")
+                }
+
                 /*
                 //console.log(value)
 
@@ -234,7 +258,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                     //res.redirect({data: {"status":token}},"/")
                 }
 */
-                res.render('user_page.ejs', {data: {"status": ""}});
+
                 //window.location.replace('/user_page.ejs');
 
             })
@@ -246,7 +270,8 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
 
 
         });
-
+        var user_token_value = 0;
+        var username = "";
 
         app.post('/pub_login', (req, res) => {
             console.log('=====================')
@@ -271,7 +296,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 //console.log(value)
                 let token = value.token;
                 if (token) {
-                    res.render('homepage.ejs', {data: {"status": token}})
+                    res.render('pub_page.ejs', {data: {"status": token}})
                     //res.redirect("/")
                 } else {
                     res.render('login.ejs', {data: {"status": "error on login"}})
@@ -291,19 +316,23 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             console.log('=====================')
             console.log(req.body)
             console.log('=====================')
-            let user = req.body.user;
+            let user = username.name;
             let pub = req.body.pub;
             let drink = req.body.drink;
             let rank = req.body.rank;
+            let token = user_token_value;
+            console.log(token);
+            let headers = {'Authorization': 'Bearer ' + token}
+            console.log(headers);
             let dati = {
                 "timestamp": Date.now(),
-                "user": user,
+                "user": user,     //variabile globale
                 "pub": pub,
                 "drink": drink,
                 "rank": rank
             };
             var promise = new Promise((resolve, reject) => {
-                request.post("http://localhost:3003/review", {json: dati},
+                request.post({url: "http://localhost:3003/review", json: dati, headers: headers},
                     (error, response, body) => {
                         if (error) {
                             reject(error);
@@ -321,7 +350,9 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 console.log("nope!");
                 //console.log(error)
             })
-        })
+        });
+
+
     }).catch(error => console.error(error));
 
 
