@@ -2,45 +2,201 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DrinkAdvisor</title>
+    <meta name="description" content="Progetto di Applicazioni WEB">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Malhi & Orihuela">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DrinkAdvisor-PUBPage</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <style>
+        html, body, h1, h4{font-family: "Open Sans", sans-serif}
+        body, html {height: 100%}
+        .bgimg {
+            background-image: url('https://dfcme.me/wp-content/uploads/2019/08/1561621714426.jpg');
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+
 </head>
+
+<header class="w3-container w3-center w3-padding-30 w3-white">
+    <h1 class="w3-xxxlarge"><b>Drink Advisor</b></h1>
+    <h6>PUB<span class="w3-tag">Home Page</span></h6>
+</header>
+
+
+<!--
 <body>
 <div>
-    <div>
-        <h1> Catalogo drink </h1>
-        <form action="/show_my_drink" method="GET">
-            <button type="submit">Ottieni catalogo</button>
-        </form>
-    </div>
-    <div>
-        <h4 > result: <%= data.catalogo %> </h4>
-    </div>
+    <h1> ottieni mie recensioni </h1>
+    <form action="/show_review_my_pub" method="GET">
+        <button type="submit">visualizza recensioni</button>
+    </form>
+    <hr>
+</div>
+<div>
     <hr/>
     <div>
         <h1> cerca un drink </h1>
-        <form action="/search_drink" method="POST">
-            <input type="text" placeholder="search drink" name="searchdrink">
-            <button type="submit">insert review</button>
+        <form action="/search_drink_for_my_pub" method="POST">
+            <input type="text" placeholder="search drink" name="searchdrinkformypub">
+            <button type="submit">search for a drink</button>
         </form>
-        <hr>
     </div>
-
     <div>
-        <h1> inserisci un drink nel catalogo </h1>
-        <form action="/insert_drink_in_catalog" method="POST">
-            <input type="text" placeholder="search drink" name="searchdrink">
-            <button type="submit">insert review</button>
-        </form>
-        <hr>
+        <h4 >
+            Correlated drinks: <%= data.lista %>
+        </h4>
     </div>
+    <hr>
+
 
 </div>
+<div>
+    <h1> Logout </h1>
+    <form action="/logout_pub" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+    <hr>
+</div>
+-->
+
+
+<body class="bgimg w3-display-container w3-animate-opacity w3-text-blak relative w3-theme-l5">
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content " style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <!-- Profile -->
+            <div class="w3-card w3-round w3-white">
+                <div class="w3-container">
+                    <h4 class="w3-center">My PUB</h4>
+                    <p class="w3-center"><img src="data:image/png;base64,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" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                    <hr>
+                </div>
+            </div>
+            <br>
+
+            <!-- Accordion -->
+            <div class="w3-card w3-round">
+                <div class="w3-white">
+                    <form action="/show_review_my_pub" method="GET">
+                        <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-pencil fa-fw w3-margin-right"></i>Get my reviews</button>
+                    </form>
+                    <form action="/logout_pub" method="POST">
+                        <button type="submit"  class="w3-button w3-block w3-theme-l1 w3-left-align">Logout</button>
+                    </form>
+
+                </div>
+            </div>
+            <br>
+        </div>
+
+        <!-- Middle Column -->
+        <!--
+        <div class="w3-col m7">
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <form action="/show_my_drink" class="ui action left icon input" method="GET">
+                                <button type="submit" class="ui teal button">Drink catalog</button>
+                            </form>
+                            <hr class="w3-clear">
+                            <div class="ui segment">
+                                <a class="ui ribbon label">My Drinks:</a>
+                                <h6 class="w3-opacity"> list of drinks: <%= data.catalogo  %></h6>
+                            </div>
+                            <hr class="w3-clear">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            -->
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <h6 class="w3-opacity">Search a Drink</h6>
+                            <form action="/search_drink_for_my_pub" class="ui action left icon input" method="POST">
+                                <i class="search icon"></i>
+                                <input type="text" class = "w3-border w3-padding" placeholder="What are you looking for?" name="searchdrinkformypub">
+                                <button type="submit" class="ui teal button"><i class="fa fa-pencil"></i>Search</button>
+                            </form>
+                            <hr class="w3-clear">
+                            <div class="ui segment">
+                                <a class="ui ribbon label">About the drink:</a>
+                                <h6 class="w3-opacity"> Correlated drinks: <%= data.lista %></h6>
+                            </div>
+                            <hr class="w3-clear">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--
+            <hr>
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <form action="/insert_drink_in_catalogue" method="POST">
+                                <input type="text" class = "w3-border w3-padding" placeholder="New drink" name="searchdrink">
+                                <button type="submit" class="ui teal button">Insert a drink in the catalog</button>
+                            </form>
+                            <hr class="w3-clear">
+                        </div>
+                    </div>
+                </div>
+            </div>
+-->
+            <hr>
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <a class="ui ribbon label">Reviews</a>
+                            <h6 class="w3-opacity small "> <%= data.status %></h6>
+                        </div>
+                        <hr class="w3-clear">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <br>
+    <!-- End Middle Column -->
+</div>
+
+</div>
+
+<!-- End Grid -->
+</div>
+
+<!-- End Page Container -->
+</div>
+
 <div>
     <h4 > result: <%= data.status %> </h4>
 </div>

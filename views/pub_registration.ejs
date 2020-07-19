@@ -2,9 +2,137 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta charset="UTF-8">
+    <meta name="description" content="Progetto di Applicazioni WEB">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Malhi & Orihuela">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Registration</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+    <style>
+        body,h1 {font-family: "Raleway", sans-serif}
+        body, html {height: 100%}
+        .bgimg {
+            background-image: url('https://images.lonelyplanetitalia.it/uploads/pinacolada-caribbean-drinks?q=80&p=slider&s=6e97ae56d5e23dc914af6f567d22f7ad');
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+        #registration{
+            border-radius: 8px;
+            transition-duration: 0.4s;
+            width: 100%;
+        }
+        .input{
+            width: 100%;
+        }
+    </style>
+
+
+    <script>
+        $(document)
+            .ready(function() {
+                $('.ui.form')
+                    .form({
+                        fields: {
+                            name:{
+                                identifier  : 'name',
+                                rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter your name'
+                                    }
+                                ]
+
+                            },
+                            email: {
+                                identifier  : 'email',
+                                rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter your e-mail'
+                                    },
+                                    {
+                                        type   : 'email',
+                                        prompt : 'Please enter a valid e-mail'
+                                    }
+                                ]
+                            },
+                            password: {
+                                identifier  : 'password',
+                                rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter your password'
+                                    },
+                                    {
+                                        type   : 'length[6]',
+                                        prompt : 'Your password must be at least 6 characters'
+                                    }
+                                ]
+                            }
+                        }
+                    })
+                ;
+            })
+        ;
+    </script>
+
+
 </head>
 <body>
+<body>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-blak relative black">
+    <div class="w3-display-middle">
+        <h2 class="w3-jumbo w3-animate-top">Register a new PUB</h2>
+        <hr class="w3-border-grey" style="margin:auto;width:40%">
+
+        <form action="/pub_register" method="POST" class="ui large form">
+            <div class=" w3-hover-opacity-off w3-padding-large w3-round-large">
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class ="pencil icon"></i>
+                        <input type="text" placeholder="Name" name="ditta">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        <input type="text" placeholder="E-mail address user" name="email">
+                    </div>
+                </div>
+
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        <input type="password" placeholder="Password" name="password">
+                    </div>
+                </div>
+
+            </div>
+            <button class="ui  inverted grey basic button" id="registration">Register</button>
+            <div class="ui error message"></div>
+        </form>
+        <hr>
+        <form action="/" method="GET">
+            <button class="ui icon button basic ">Back to login page <i class="sign out alternate icon"></i></button>
+        </form>
+
+
+    </div>
+</div>
+<!--
 <div>
     <h1> Register new pub </h1>
     <form action="/pub_register" method="POST">
@@ -15,6 +143,7 @@
     </form>
     <hr>
 </div>
+-->
 <div>
     <h4 > result: <%= data.status %> </h4>
 </div>

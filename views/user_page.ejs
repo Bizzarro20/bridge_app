@@ -2,29 +2,72 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>DrinkAdvisor</title>
+    <meta name="description" content="Progetto di Applicazioni WEB">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Malhi & Orihuela">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>DrinkAdvisor-UserPage</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+    <style>
+        html, body, h1, h4 {font-family: "Open Sans", sans-serif}
+        body, html {height: 100%}
+        .bgimg {
+            background-image: url('https://assets.punchdrink.com/wp-content/uploads/2017/08/Social-Zombie-Cocktial.jpg');
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+    </style>
+
 </head>
+
+<header class="w3-container w3-center w3-padding-30 w3-white">
+    <h1 class="w3-xxxlarge"><b>Drink Advisor</b></h1>
+    <h6>User<span class="w3-tag">Home Page</span></h6>
+</header>
+
+
+
+<!--
 <body>
 <div>
     <div>
         <h1> cerca un drink </h1>
         <form action="/search_drink" method="POST">
             <input type="text" placeholder="search drink" name="searchdrink">
-            <button type="submit">insert review</button>
+            <button type="submit">search drink</button>
+        </form>
+    </div>
+    <br/>
+
+    <div>
+        <h1> ottieni i pubs </h1>
+        <form action="/show_pubs" method="GET">
+            <button type="submit">visualizza pubs</button>
         </form>
         <hr>
     </div>
+    <br/>
+
     <div>
         <h4 >
             Correlated drinks: <%= data.lista %>
         </h4>
     </div>
+    <hr>
 
     <div>
         <h1> Review </h1>
@@ -32,11 +75,141 @@
             <input type="text" placeholder="pub" name="pub">
             <input type="text" placeholder="drink" name="drink">
             <input type="text" placeholder="rank" name="rank">
+            <input type="text" placeholder="comment" name="comment">
             <button type="submit">insert review</button>
         </form>
         <hr>
     </div>
+    <div>
+        <h1> Logout </h1>
+        <form action="/logout_user" method="POST">
+            <button type="submit">Logout</button>
+        </form>
+        <hr>
+    </div>
 </div>
+-->
+
+
+<body class="bgimg w3-display-container w3-animate-opacity w3-text-blak relative w3-theme-l5">
+<!-- Navbar on small screens -->
+<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
+    <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+</div>
+
+<!-- Page Container -->
+<div class="w3-container w3-content " style="max-width:1400px;margin-top:80px">
+    <!-- The Grid -->
+    <div class="w3-row">
+        <!-- Left Column -->
+        <div class="w3-col m3">
+            <!-- Profile -->
+            <div class="w3-card w3-round w3-white">
+                <div class="w3-container">
+                    <h4 class="w3-center">My Profile</h4>
+                    <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+                    <hr>
+                </div>
+            </div>
+            <br>
+
+            <!-- Accordion -->
+            <div class="w3-card w3-round">
+                <div class="w3-white">
+                    <button onclick="myFunction('Demo3')" class="w3-button w3-block w3-theme-l1 w3-left-align"><i class="fa fa-pencil fa-fw w3-margin-right"></i> My Reviews</button>
+
+                    <form action="/logout_user" method="POST">
+                        <button type="submit"  class="w3-button w3-block w3-theme-l1 w3-left-align">Logout</button>
+                    </form>
+
+                </div>
+            </div>
+            <br>
+
+        </div>
+
+        <!-- Middle Column -->
+        <div class="w3-col m7">
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <h6 class="w3-opacity">Search a Drink</h6>
+
+                            <form action="/search_drink" class="ui action left icon input" method="POST">
+                                <i class="search icon"></i>
+                                <input type="text" class = "w3-border w3-padding" placeholder="What are you looking for?" name="searchdrink">
+                                <button type="submit" class="ui teal button"><i class="fa fa-pencil"></i> Search</button>
+                            </form>
+                            <hr class="w3-clear">
+                            <div class="ui segment">
+                                <a class="ui ribbon label">About the drink:</a>
+                                <h6 class="w3-opacity"> Correlated drinks: <%= data.lista %></h6>
+                            </div>
+                            <hr class="w3-clear">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <form action="/show_pubs" method="GET">
+                                <button type="submit" class="ui teal button">View the Pubs</button>
+                            </form>
+                            <hr class="w3-clear">
+                            <div class="ui segment">
+                                <a class="ui ribbon label">List of PUBs:</a>
+                                <h6 class="w3-opacity">  <%= data.status %> </h6>
+                            </div>
+                            <hr class="w3-clear">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+
+
+            <div class="w3-row-padding">
+                <div class="w3-col m12">
+                    <div class="w3-card w3-round w3-white">
+                        <div class="w3-container w3-padding">
+                            <h6 class="w3-opacity"> Review </h6>
+                            <hr class="w3-clear">
+                            <form action="/insert_review" method="POST">
+                                <div class="ui fluid action input">
+                                    <input type="text" placeholder="pub" name="pub">
+                                    <input type="text" placeholder="drink" name="drink">
+                                    <input type="text" placeholder="rank" name="rank">
+                                </div>
+                                <div class="ui fluid action input">
+                                    <input type="text" placeholder="comment" name="comment">
+                                    <!--<div class="ui heart rating" data-rating="1" data-max-rating="5"></div>-->
+                                    <button type="submit" class="ui teal button">insert review</button>
+                                </div>
+                            </form>
+                            <hr>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br>
+        </div>
+        <!-- End Middle Column -->
+    </div>
+
+</div>
+
+<!-- End Grid -->
+</div>
+
+<!-- End Page Container -->
+</div>
+</body>
+
 <div>
     <h4 > result: <%= data.status %> </h4>
 </div>

@@ -2,6 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Progetto di Applicazioni WEB">
+    <meta name="keywords" content="HTML, CSS, JavaScript">
+    <meta name="author" content="Malhi & Orihuela">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DrinkAdvisor</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
@@ -9,43 +13,153 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+
+
+    <!-- Stile css da inserire in un file a parte -->
+    <style>
+        body,h1 {font-family: "Raleway", sans-serif}
+        body, html {height: 100%}
+        .bgimg {
+            background-image: url('https://images5.alphacoders.com/409/409133.jpg');
+            min-height: 100%;
+            background-position: center;
+            background-size: cover;
+        }
+        .button{
+
+            width: 100%;
+        }
+
+
+    </style>
+
+    <!-- Questa parte serve a evidenziare esteticamente gi errori durante l'inserimento della pasword-->
+    <script>
+        $(document)
+            .ready(function() {
+                $('.ui.form')
+                    .form({
+                        fields: {
+                            email: {
+                                identifier  : 'emaillogin',
+                                rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter your e-mail'
+                                    },
+                                    {
+                                        type   : 'email',
+                                        prompt : 'Please enter a valid e-mail'
+                                    }
+                                ]
+                            },
+                            password: {
+                                identifier  : 'passwordlogin',
+                                rules: [
+                                    {
+                                        type   : 'empty',
+                                        prompt : 'Please enter your password'
+                                    },
+                                    {
+                                        type   : 'length[6]',
+                                        prompt : 'Your password must be at least 6 characters'
+                                    }
+                                ]
+                            }
+                        }
+                    })
+                ;
+            })
+        ;
+    </script>
+    <!-- Per ora questa parte di codice (css e js) è qui perche non riesco a fare funzionare il caricamento da un file usando link!-->
+
 </head>
 <body>
-    <div>
-        <h1> Login Utenti </h1>
-        <form action="/user_login" method="POST">
-            <input type="text" placeholder="email" name="emaillogin">
-            <input type="text" placeholder=" password" name="passwordlogin">
-            <button type="submit">Login</button>
-        </form>
-        <hr/>
+<div class="bgimg w3-display-container w3-animate-opacity w3-text-blak relative">
+    <div class="w3-display-middle">
+        <h2 class="w3-jumbo w3-animate-top">Drink Advisor</h2>
+        <hr class="w3-border-grey" style="margin:auto;width:40%">
+        <p class="w3-large w3-center">The best place to search your favorite drink</p>
+        <br><br><br><br>
+        <p>New to us?</p>
+        <div class="w3-bar-block">
+            <form action="/userRegistration" method="GET">
+                <button class="w3-bar-item w3-button w3-hover-white">
+                    <i class="add user basic icon"></i>
+                    Register now as a normal user
+                </button>
+            </form>
+            <form action="/pubRegistration" method="GET">
+                <button class="w3-bar-item w3-button w3-hover-white">
+                    <i class="add user basic icon "></i>
+                    Register now as a Pub
+                </button>
+            </form>
+        </div>
     </div>
-    <button class="ui pink mini button">Aggiungi caratteristica&nbsp <i class="smile outline icon"></i></button>
 
-    <div>
-        <h1> Login Pub </h1>
-        <form action="/pub_login" method="POST">
-            <input type="text" placeholder="email" name="emaillogin">
-            <input type="text" placeholder=" password" name="passwordlogin">
-            <button type="submit">Login</button>
-        </form>
-        <hr/>
+    <div class="mySlides w3-animate-opacity">
+        <div class="w3-display-left w3-padding w3-hide-small" style="width:35%">
+            <div class="w3-black w3-opacity w3-hover-opacity-off w3-padding-large w3-round-large">
+                <h1 class="w3-xlarge">Log-in to your account</h1>
+                <hr class="w3-opacity">
+
+                <p>Normal Users</p>
+                <form action="/user_login" method="POST" class="ui large form">
+                    <div class="ui stacked secondary  segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="emaillogin" placeholder="E-mail address user">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="passwordlogin" placeholder="Password">
+                            </div>
+                        </div>
+                        <button class="ui fluid large teal submit button">
+                            Login
+                        </button>
+                    </div>
+
+                    <div class="ui error message"></div>
+                </form>
+
+                <p>Pub</p>
+                <form action="/pub_login" method="POST" class="ui large form">
+                    <div class="ui stacked secondary  segment">
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="user icon"></i>
+                                <input type="text" name="emaillogin" placeholder="E-mail address Pub">
+                            </div>
+                        </div>
+                        <div class="field">
+                            <div class="ui left icon input">
+                                <i class="lock icon"></i>
+                                <input type="password" name="passwordlogin" placeholder="Password">
+                            </div>
+                        </div>
+                        <button class="ui fluid large teal submit button">
+                            Login
+                        </button>
+                    </div>
+                    <div class="ui error message"></div>
+                </form>
+
+            </div>
+        </div>
+
     </div>
-
-
-    <p>if you are not register user, click on this button</p>
-    <form action="/userRegistration" method="GET">
-        <button type="submit">Register now</button>
-    </form>
-
-    <p>if you are not register pub, click on this button</p>
-    <form action="/pubRegistration" method="GET">
-        <button type="submit">Register now</button>
-    </form>
-
-    <div>
-        <h4 > result: <%= data.status %> </h4>
-    </div>
+</div>
+<div>
+    <h4 > result: <%= data.status %> </h4>
+</div>
 </body>
 
 </html>
