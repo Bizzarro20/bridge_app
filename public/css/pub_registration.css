@@ -1,0 +1,16 @@
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('https://images.lonelyplanetitalia.it/uploads/pinacolada-caribbean-drinks?q=80&p=slider&s=6e97ae56d5e23dc914af6f567d22f7ad');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+#registration{
+    border-radius: 8px;
+    transition-duration: 0.4s;
+    width: 100%;
+}
+.input{
+    width: 100%;
+}

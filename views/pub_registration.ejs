@@ -15,82 +15,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
-    <style>
-        body,h1 {font-family: "Raleway", sans-serif}
-        body, html {height: 100%}
-        .bgimg {
-            background-image: url('https://images.lonelyplanetitalia.it/uploads/pinacolada-caribbean-drinks?q=80&p=slider&s=6e97ae56d5e23dc914af6f567d22f7ad');
-            min-height: 100%;
-            background-position: center;
-            background-size: cover;
-        }
-        #registration{
-            border-radius: 8px;
-            transition-duration: 0.4s;
-            width: 100%;
-        }
-        .input{
-            width: 100%;
-        }
-    </style>
-
-
-    <script>
-        $(document)
-            .ready(function() {
-                $('.ui.form')
-                    .form({
-                        fields: {
-                            name:{
-                                identifier  : 'name',
-                                rules: [
-                                    {
-                                        type   : 'empty',
-                                        prompt : 'Please enter your name'
-                                    }
-                                ]
-
-                            },
-                            email: {
-                                identifier  : 'email',
-                                rules: [
-                                    {
-                                        type   : 'empty',
-                                        prompt : 'Please enter your e-mail'
-                                    },
-                                    {
-                                        type   : 'email',
-                                        prompt : 'Please enter a valid e-mail'
-                                    }
-                                ]
-                            },
-                            password: {
-                                identifier  : 'password',
-                                rules: [
-                                    {
-                                        type   : 'empty',
-                                        prompt : 'Please enter your password'
-                                    },
-                                    {
-                                        type   : 'length[6]',
-                                        prompt : 'Your password must be at least 6 characters'
-                                    }
-                                ]
-                            }
-                        }
-                    })
-                ;
-            })
-        ;
-    </script>
-
-
+    <link type="text/css" rel='stylesheet' href='/css/pub_registration.css' />
+    <script src="/script/pub_registration.js"></script>
 </head>
-<body>
+
 <body>
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-blak relative black">
     <div class="w3-display-middle">
@@ -132,18 +63,7 @@
 
     </div>
 </div>
-<!--
-<div>
-    <h1> Register new pub </h1>
-    <form action="/pub_register" method="POST">
-        <input type="text" placeholder="ditta" name="ditta">
-        <input type="text" placeholder="email" name="email">
-        <input type="text" placeholder=" password" name="password">
-        <button type="submit">Submit</button>
-    </form>
-    <hr>
-</div>
--->
+
 <div>
     <h4 > result: <%= data.status %> </h4>
 </div>

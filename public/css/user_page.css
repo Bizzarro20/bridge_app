@@ -1,0 +1,8 @@
+html, body, h1, h4 {font-family: "Open Sans", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('https://assets.punchdrink.com/wp-content/uploads/2017/08/Social-Zombie-Cocktial.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}

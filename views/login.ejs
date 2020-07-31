@@ -6,75 +6,19 @@
     <meta name="keywords" content="HTML, CSS, JavaScript">
     <meta name="author" content="Malhi & Orihuela">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>DrinkAdvisor</title>
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
-
-    <!-- Stile css da inserire in un file a parte -->
-    <style>
-        body,h1 {font-family: "Raleway", sans-serif}
-        body, html {height: 100%}
-        .bgimg {
-            background-image: url('https://images5.alphacoders.com/409/409133.jpg');
-            min-height: 100%;
-            background-position: center;
-            background-size: cover;
-        }
-        .button{
-
-            width: 100%;
-        }
-
-
-    </style>
-
-    <!-- Questa parte serve a evidenziare esteticamente gi errori durante l'inserimento della pasword-->
-    <script>
-        $(document)
-            .ready(function() {
-                $('.ui.form')
-                    .form({
-                        fields: {
-                            email: {
-                                identifier  : 'emaillogin',
-                                rules: [
-                                    {
-                                        type   : 'empty',
-                                        prompt : 'Please enter your e-mail'
-                                    },
-                                    {
-                                        type   : 'email',
-                                        prompt : 'Please enter a valid e-mail'
-                                    }
-                                ]
-                            },
-                            password: {
-                                identifier  : 'passwordlogin',
-                                rules: [
-                                    {
-                                        type   : 'empty',
-                                        prompt : 'Please enter your password'
-                                    },
-                                    {
-                                        type   : 'length[6]',
-                                        prompt : 'Your password must be at least 6 characters'
-                                    }
-                                ]
-                            }
-                        }
-                    })
-                ;
-            })
-        ;
-    </script>
-    <!-- Per ora questa parte di codice (css e js) è qui perche non riesco a fare funzionare il caricamento da un file usando link!-->
+    <link type="text/css" rel='stylesheet' href='/css/login.css' />
+    <script src="/script/login.js"></script>
 
 </head>
 <body>

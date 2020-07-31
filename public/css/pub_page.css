@@ -1,0 +1,8 @@
+html, body, h1, h4{font-family: "Open Sans", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('https://www.mangiaebevi.it/wp-content/uploads/2017/03/drink2.jpg');
+    position: relative;
+    overflow: scroll;
+
+}

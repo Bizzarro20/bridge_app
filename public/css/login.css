@@ -1,0 +1,14 @@
+body,h1 {font-family: "Raleway", sans-serif}
+body, html {height: 100%}
+.bgimg {
+    background-image: url('https://images5.alphacoders.com/409/409133.jpg');
+    min-height: 100%;
+    background-position: center;
+    background-size: cover;
+}
+.button{
+
+    width: 100%;
+}
+
+/*https://stackoverflow.com/questions/44642090/why-cant-i-link-my-css-to-my-ejs-files  da qui preso l'idea separare css e js*/
