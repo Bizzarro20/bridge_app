@@ -76,35 +76,17 @@
                     <div class="w3-card w3-round w3-white">
                         <div class="w3-container w3-padding">
                             <form action="/show_review_my_pub" class="ui action left icon input" method="GET">
-                                <button type="submit" class="ui teal button"><i class="fa fa-pencil"></i> My Reviews</button>
+                                <button onclick="f1()" type="submit" class="ui teal button"><i class="fa fa-pencil"></i> My Reviews</button>
                             </form>
                             <hr class="w3-clear">
-                            <script>
-                                var my_pub_rev = <%- JSON.stringify(data.my_pub_reviews) %>
-                                console.log(my_pub_rev);
-                                var dataset_pub = [];
-                                for (var z = 0; z < my_pub_rev.length; z+=5) {
-                                    dataset_pub.push([my_pub_rev[z],my_pub_rev[z+1],my_pub_rev[z+2],my_pub_rev[z+3],my_pub_rev[z+4]]);
-                                }
-                                console.log(dataset_pub)
-                                $(document).ready( function () {
-                                    t1= $('#table_my_pub_reviews').DataTable({
-                                        data: dataset_pub,
-                                        columns: [
-                                            { title: "Date" },
-                                            { title: "User" },
-                                            { title: "Drink" },
-                                            { title: "Rank" },
-                                            { title: "Comment"}
-                                        ]
-                                    })
-                                });
 
-                            </script>
+                            <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
+                            <!--- necessari per la separazioni dei contenuti --->
+                            <div id="my_pub_reviews"><%=data.my_pub_reviews%></div>
 
+                            <!--- tabelle che visualizzano i dati renderizzati --->
                             <table id="table_my_pub_reviews" class="ui teal table"></table>
 
-                            <hr class="w3-clear">
                         </div>
                     </div>
                 </div>
@@ -117,29 +99,15 @@
                     <div class="w3-card w3-round w3-white">
                         <div class="w3-container w3-padding">
                             <form action="/show_my_drink" class="ui action left icon input" method="GET">
-                                <button id="test_for_datatable_catalogue" type="submit" class="ui teal button">Drink catalogue</button>
+                                <button onclick="f2()" id="test_for_datatable_catalogue" type="submit" class="ui teal button">Drink catalogue</button>
                             </form>
-                            <script>
-                                var cat = <%- JSON.stringify(data.catalogo) %>
-                                    console.log(cat);
-
-                                var dataset = [];
-                                for (var i = 0; i < cat.length; i+=2) {
-                                    dataset.push([cat[i],cat[i+1]]);
-                                }
-                                console.log(dataset);
-                                $(document).ready( function () {
-                                    t = $('#table_pub_catalogue').DataTable({
-                                        data: dataset,
-                                        columns: [
-                                            { title: "Date Insert" },
-                                            { title: "Drink" }
-                                        ]
-                                    })
-                                });
-
-                            </script>
                             <hr class="w3-clear">
+
+                            <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
+                            <!--- necessari per la separazioni dei contenuti --->
+                            <div id="my_pub_catalogue"><%=data.catalogo%></div>
+
+                            <!--- tabelle che visualizzano i dati renderizzati --->
                             <table id="table_pub_catalogue" class="ui teal table"></table>
                         </div>
                     </div>
@@ -156,33 +124,18 @@
                             <form action="/search_drink_for_my_pub" class="ui action left icon input" method="POST">
                                 <i class="search icon"></i>
                                 <input type="text" class = "w3-border w3-padding" placeholder="What are you looking for?" name="searchdrinkformypub">
-                                <button type="submit" class="ui teal button"><i class="fa fa-pencil"></i>Search</button>
+                                <button onclick="f3()" type="submit" class="ui teal button"><i class="fa fa-pencil"></i>Search</button>
                             </form>
-                            <script>
-                                var drink = <%- JSON.stringify(data.lista_drink) %>
-                                var dataset_drink = [];
-                                for (var i = 0; i < drink.length; i+=7) {
-                                    dataset_drink.push([drink[i],drink[i+1],drink[i+2],drink[i+3],drink[i+4],drink[i+5],drink[i+6]]);
-                                }
-                                $(document).ready( function () {
-                                    $('#table_drink_info').DataTable({
-                                        data: dataset_drink,
-                                        columns: [
-                                            { title: "Drink" },
-                                            { title: "Category" },
-                                            { title: "Alcoholic/Not Alcoholic" },
-                                            { title: "Type of Glass" },
-                                            { title: "Instructions" },
-                                            { title: "Ingredients" },
-                                            { title: "Quantity of ingredients" }
-                                        ]
-                                    })
-                                });
-
-                            </script>
-
                             <hr class="w3-clear">
+
+                            <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
+                            <!--- necessari per la separazioni dei contenuti --->
+                            <div id="drink_for_pub"><%=data.lista_drink%></div>
+
+                            <!--- tabelle che visualizzano i dati renderizzati --->
                             <table id="table_drink_info" class="ui teal table"></table>
+
+
                             <h4 ><%= data.lista_drink_failure %> </h4>
                             <hr class="w3-clear">
                         </div>
@@ -219,27 +172,16 @@
                         <div class="w3-card w3-round w3-white">
                             <div class="w3-container w3-padding">
                                 <form action="/average_rank_each_drink" class="ui action left icon input" method="GET">
-                                    <button type="submit" class="ui teal button">Best drink in catalogue</button>
+                                    <button onclick="f4()" type="submit" class="ui teal button">Best drink in catalogue</button>
                                 </form>
-                                    <script>
-                                        var perf = <%- JSON.stringify(data.best_drinks) %>
-                                        var dataset = [];
-                                        for (var i = 0; i < perf.length; i+=2) {
-                                            dataset.push([perf[i],perf[i+1]]);
-                                        }
-                                        $(document).ready( function () {
-                                            t = $('#table_drinks_performance').DataTable({
-                                                data: dataset,
-                                                columns: [
-                                                    { title: "Drink" },
-                                                    { title: "Average Rank" }
-                                                ]
-                                            })
-                                        });
-
-                                    </script>
 
                                 <hr class="w3-clear">
+
+                                <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
+                                <!--- necessari per la separazioni dei contenuti --->
+                                <div id="pub_performance_for_each_drink"><%=data.best_drinks%></div>
+
+                                <!--- tabelle che visualizzano i dati renderizzati --->
                                 <table id="table_drinks_performance" class="ui teal table"></table>
 
                             </div>
@@ -257,7 +199,8 @@
     </div>
 
     <div>
-        <h4 > result: <%= data.status %> </h4>
+        <h4 > result: <%= data.status %> </h4>    <!-- VEDO DOVE METTERLO -->
+
     </div>
 </div>
 </body>

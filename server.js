@@ -76,7 +76,7 @@ function convert_to_list_api_result_for_pub(o) {
         col4.push(a[z][4]);
         col5.push(a[z][5]);
         col6.push(a[z][6]);
-        b.push(col0[z], col1[z], col2[z], col3[z], col4[z], col5[z], col6[z]);
+        b.push(col0[z], "*",col1[z],"*", col2[z], "*",col3[z], "*",col4[z], "*",col5[z], "*",col6[z],"*");
 
     }
     return b;
@@ -147,7 +147,7 @@ function get_my_pub_reviews(o, p) {
             let date1= o.review[i].timestamp;   //convert mongodb date
             date1.toString();
             let date2 = date1.substring(0, 10);
-            a.push(date2, o.review[i].user, o.review[i].drink, o.review[i].rank, o.review[i].comment)
+            a.push(date2, "*",o.review[i].user, "*", o.review[i].drink,  "*",o.review[i].rank,  "*",o.review[i].comment, "*")
         }
     }
     return a;
@@ -159,30 +159,37 @@ function get_my_pub_reviews(o, p) {
 //funzione che calcola la media dei voti per ciascun drink nel catalogo del pub che ha fatto login
 function get_average_rank_per_drink(o, p, c) {
     let a = [];
+
+    //prendi tutte le reviews del pub loggato
     for (let i = 0; i < o.review.length; i++) {
         if (o.review[i].pub == p) {
             a.push(o.review[i].drink, o.review[i].rank)
         }
     }
+
     //prendo la lista dei drink nel catalogo di quel pub
-    //ogni volta che ottengo ad es il primo drink nel vettore a, prendo il rank e lo salvo ... poi faccio la media
+    //ogni volta che ottengo un drink nelle reviews prima salvate
+    // che combacia con un drink nel catalogo del pub, aggiungi il valore
+    // del rank in una variabile somma che poi serve per calcolare la media di quel
+    // drink nel catalogo.
     //salvo quel drink e la media in un vettore b
+
     let b= [];
     let somma = 0;
     let cnt = 0;
-    for (let z = 0; z < c.length; z+=2){
-         for (let j = 0; j < a.length; j+=2) {
-            if (a[j] == c[z+1]) {
-                    somma+= a[j+1];
-                    cnt++;
+    for (let z = 0; z < c.length; z+=4){        //c è il catalogo, vado avanti di quattro perchè c contiene due colonne (pub_loggato, drink) che sono divise da dei * in quanto il catalogo è salvato in locale in questo modo
+         for (let j = 0; j < a.length; j+=2) {      //a contiene le recesioni, vado avanti di due perchè ha due colonne (drink, rank)
+            if (a[j] == c[z+2]) {                   //confronto tra i nomi del drink di ciascun vettore
+                    somma+= a[j+1];                 //sommo il rank
+                    cnt++;                      //per dividere e ottenere la media
             }
          }
-        if(isNaN(somma/cnt)){           //gestito NaN
-            b.push(c[z+1], 0)
+        if(isNaN(somma/cnt)){           //gestito NaN, capita se non ho recensioni per un drink nel catalogo
+            b.push(c[z+2], "*", 0, "*")               //salvo zero
         }
         else {
-            b.push(c[z + 1], somma / cnt)
-        }
+            b.push(c[z + 2],  "*", (somma / cnt),  "*")       //altrimenti salvo la media nel vettore b (drink, media)
+        }                                                         //* utilizzato per il datatable associato.
         somma = 0;
         cnt = 0;
     }
@@ -204,6 +211,8 @@ function get_user_reviews(o, u){
     return a;
 }
 
+
+/*
 //ottieni una lista di tutti i pub registrati su DrinkAdvisor
 function get_all_pub_names (o){
     let b = [];
@@ -211,7 +220,7 @@ function get_all_pub_names (o){
         b.push(o.pub[i].ditta);
     }
     return b;
-}
+}*/
 
 
 //funzione che permette di ottenere il catalogo di un determinato pub dato l'insieme dei cataloghi
@@ -222,7 +231,7 @@ function get_pub_catalogue(o, p){
             let date1= o.catalogue[i].timestamp;   //convert mongodb date
             date1.toString();
             let date2 = date1.substring(0, 10);
-            a.push(date2, o.catalogue[i].drink);
+            a.push(date2, "*",o.catalogue[i].drink, "*");
         }
     }
     return a;
@@ -278,6 +287,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
         var pub_token_value = 0;
         var pubdata = "";
         var catalogo_pub_loggato = [];
+        var lista_di_tutti_pub = [];
 
         //------------------
 
@@ -394,7 +404,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 console.log("you get the reviews that you submitted!");
                 let rev= get_user_reviews(value,userdata.name);
                 console.log(rev);
-                res.render('user_page.ejs', {data: {"my_reviews": rev}})  // lo devo fare xk devo mandare al client .. qui siamo il server
+                res.render('user_page.ejs', {data: {"my_reviews": rev,"show_pubs": lista_di_tutti_pub}})  // lo devo fare xk devo mandare al client .. qui siamo il server
 
                 if (value.user == 'MongoError') {
                     res.render('user_page.ejs', {data: {"status": "Error on DB"}})
@@ -434,6 +444,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             }).then(value => {
                 console.log("you get your catalogue of drinks!");
                 let rev= get_pub_catalogue(value,pubdata.ditta);
+                console.log(rev);
                 catalogo_pub_loggato = rev;             //inizializzazione var globale
                 res.render('pub_page.ejs', {data: {"catalogo": rev}})  // lo devo fare xk devo mandare al client .. qui siamo il server
 
@@ -446,6 +457,8 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             })
         });
 
+
+        /*
 
         //ottieni i pubs nel db nella user_page   --- MAGARI POSSO USARE LE COLLECTION SOPRA?  TOLTOOOOOOO
         app.get('/show_pubs', (req,res) => {
@@ -477,7 +490,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             console.log("nope!");
         });
         });
-
+*/
 
         //carica le ultime i reviews nella user_page    DA FARE LE ULTIME!!!!!!!!
         app.get('/get_all_reviews', (req,res) => {
@@ -496,7 +509,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 var obj = JSON.parse(value);
                 let r = get_all_reviews(obj, userdata.name);
                 console.log(r);
-                res.render('user_page.ejs', {data: {"reviews": r}})  // lo devo fare xk devo mandare al client .. qui siamo il server
+                res.render('user_page.ejs', {data: {"reviews": r,"show_pubs": lista_di_tutti_pub}})  // lo devo fare xk devo mandare al client .. qui siamo il server
 
                 if (value.user == 'MongoError') {
                     res.render('user_page.ejs', {data: {"status": "Error on DB"}})
@@ -531,7 +544,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 console.log("all the data regarding catalogues are loaded");
                 var obj = JSON.parse(value);
                 let rev= edit_data_format_of_catalogue(obj);
-                res.render('user_page.ejs', {data: {"pub_catalogues": rev}})  // lo devo fare xk devo mandare al client .. qui siamo il server
+                res.render('user_page.ejs', {data: {"pub_catalogues": rev,"show_pubs": lista_di_tutti_pub}})  // lo devo fare xk devo mandare al client .. qui siamo il server
 
 
 
@@ -578,9 +591,9 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             let d = get_drink_for_user(searchdrink);
             d.then(value => {
                 if (value == -1){
-                    res.render('user_page.ejs', {data: {"lista_drink_failure_user": "Sorry, no information are available for this drink. You can contact directly a pub if you find the drink that you are interested in the catalogues of the pubs"}});
+                    res.render('user_page.ejs', {data: {"lista_drink_failure_user": "Sorry, no information are available for this drink. You can contact directly a pub if you find the drink that you are interested in the catalogues of the pubs","show_pubs": lista_di_tutti_pub}});
                 }
-                res.render('user_page.ejs', {data: {"lista_drink_user": value}});
+                res.render('user_page.ejs', {data: {"lista_drink_user": value, "show_pubs": lista_di_tutti_pub}});
             }).catch(error => {
                 res.render('user_page.ejs', {data: {"lista_drink_user": "drink not find"}})
                 console.log("nope!");
@@ -699,19 +712,30 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 console.log("user loggato!");
                 user_token_value = value.token;
                 userdata = value.user;          //tutte le info sul user
-                if (value.token) {
-                    res.render('user_page.ejs', {data: {"status": "loggato e il tuo token è " + value.token}});
-                }else{
-                    res.render('login.ejs', {data: {"status": "error on login of user"}})
-                    //res.redirect({data: {"status":token}},"/")
-                }
+                var allpub = pubCollection.find().toArray().then((data) => {
+                    // Here you can do something with your data
+                    var result = [];
+                    for (let i = 0; i < data.length; i++) {
+                        result.push(data[i].ditta);
+                    }
+                    console.log(result);
+                    lista_di_tutti_pub = result;            //inizializza variabile globale, ricaricata ogni volta che faccio una nuova recensione
+                    res.render('user_page.ejs', {data: {"show_pubs": lista_di_tutti_pub}});
+                    console.log(result);
+                })
+
+                    /*if (value.token) {
+                        res.render('user_page.ejs', {data: {"status": "loggato e il tuo token è " + value.token}});
+                    }else{
+                        res.render('login.ejs', {data: {"status": "error on login of user"}})
+                        //res.redirect({data: {"status":token}},"/")
+                    }
+                })*/
+                    .catch(error => {
+                        res.render('login.ejs', {data: {"status": "errore"}})
+                        console.log("nope!");
+                    });
             })
-                .catch(error => {
-                    res.render('login.ejs', {data: {"status": "errore"}})
-                    console.log("nope!");
-                });
-
-
         });
 
         //viene gestito il login, viene emesso un nuovo token che viene salvato nel db
@@ -873,6 +897,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             }).then(value => {
                 console.log("drink deleted from catalogue!");
                 catalogo_pub_loggato = get_pub_catalogue(value,pubdata.ditta) ;
+                console.log(catalogo_pub_loggato);
                 res.render('pub_page.ejs', {data: {"status": "drink deleted from catalogue!"}});
 
                 //res.redirect("/")
@@ -892,17 +917,6 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
             let user = userdata.name;           //salvato durante login
             let pub = req.body.pub;
             //controllo pub disponibile nel database
-            /*let allpub= pubCollection.find().toArray();
-            console.log(allpub);
-            let ok = false;
-            for (let i = 0; i < allpub.length; i++){
-                console.log(allpub[i].ditta);
-                console.log(pub);
-
-                if (pub.localeCompare(allpub[i].ditta) == 0){
-                    ok = true;
-                }
-            }*/
                 let drink = req.body.drink;
                 let rank = req.body.rank;
                 let comment = req.body.comment;
@@ -927,7 +941,7 @@ MongoClient.connect(mongodb_connection_string, { useUnifiedTopology: true })
                 }).then(value => {
                     console.log("review insert correctly!");
                     console.log(value)
-                    res.render('user_page.ejs', {data: {"status": "review saved"}});
+                    res.render('user_page.ejs', {data: {"show_pubs": lista_di_tutti_pub}});  //ricarica il vettore dei pub tra cui scegliere
 
                     //res.redirect("/")
                 }).catch(error => {

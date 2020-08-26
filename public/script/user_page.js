@@ -104,5 +104,31 @@ $(document).ready(function f4() {
     })
     $('#catalogues').hide()
 
+
+$(document).ready(function f5(){
+
+    let array_pubs1 = document.getElementById("lista_pubs").innerText
+
+    let array_pubs = array_pubs1.split(",");  //creo vettore
+
+
+    var array_rating = ['1', '2', '3', '4', '5'];
+
+    menu1 = document.getElementById('menu1');
+    menu3 = document.getElementById('menu3');
+
+    for (let i = 0; i < array_pubs.length; i++) {
+        menu1.add(new Option(array_pubs[i]));
+    }
+    ;
+
+    for (rating in array_rating) {
+        menu3.add(new Option(array_rating[rating]));
+    }
+    ;
+    $('#lista_pubs').hide()
+})
+
+
 });
 

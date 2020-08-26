@@ -38,8 +38,24 @@
 
 <body class="bgimg w3-display-container w3-animate-opacity w3-text-blak relative w3-theme-l5">
 <!-- Navbar on small screens -->
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:150px;" id="mySidebar"><br>
+    <div class="w3-container">
+        <h4 class="w3-centre">My Profile</h4>
+        <p class="w3-centre"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+    </div>
+
+</nav>
+
+<div class="ui secondary menu">
+    <div class="ui item right">
+        <form action="/logout_user" method="POST">
+            <button type="submit"  class="w3-button w3-block w3-theme-l1 w3-left-align">Logout</button>
+        </form>
+    </div>
+</div>
+
 <div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a href="#" class="w3-bar-item w3-button w3-padding-large">My Profile</a>
+    <a class="w3-bar-item w3-button w3-padding-large">My Profile</a>
 </div>
 
 <!-- Page Container -->
@@ -49,30 +65,16 @@
         <!-- Left Column -->
         <div class="w3-col m3">
             <!-- Profile -->
-            <div class="w3-card w3-round w3-white">
-                <div class="w3-container">
-                    <h4 class="w3-center">My Profile</h4>
-                    <p class="w3-center"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
-                    <hr>
-                </div>
-            </div>
+
             <br>
 
-            <!-- Accordion -->
-            <div class="w3-card w3-round">
-                <div class="w3-white">
-                    <form action="/logout_user" method="POST">
-                        <button type="submit"  class="w3-button w3-block w3-theme-l1 w3-left-align">Logout</button>
-                    </form>
 
-                </div>
-            </div>
             <br>
 
         </div>
 
         <!-- Middle Column -->
-            <div class="w3-col m7">
+            <div class="w3-col m9">
                 <div class="w3-row-padding">
                     <div class="w3-col m12">
                         <div class="w3-card w3-round w3-white">
@@ -155,17 +157,36 @@
                 <div class="w3-col m12">
                     <div class="w3-card w3-round w3-white">
                         <div class="w3-container w3-padding">
-                            <h6 class="w3-opacity"> Review </h6>
+                            <h6 class="w3-opacity"> Review - please have a look on the drinks in the catalogues before reviewing (you are free to review a drink not in the catalogues yet)</h6>
                             <hr class="w3-clear">
-                            <form action="/insert_review" method="POST">
-                                <div class="ui fluid action input">
-                                    <input type="text" placeholder="pub" name="pub">
-                                    <input type="text" placeholder="drink" name="drink">
-                                    <input type="text" placeholder="rank" name="rank">
+                            <form action="/insert_review" method="POST" id="reviews">
+                                <div onclick="f5()" class="ui fluid action input">
+
+                                    <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
+                                    <!--- necessari per la separazioni dei contenuti --->
+                                    <div id="lista_pubs"><%=data.show_pubs%></div>
+
+                                    <!-- MENU recensioni-->
+
+                                    <select name="pub"  class="ui fluid search dropdown"  id = "menu1" form = "reviews" >
+                                        <option value="">Pubs</option>
+                                    </select>
+
+
+                                    <!--cambiare ... non select!! -->
+                                    <select name="drink"  class="ui fluid search dropdown"  id = "menu2" form = "reviews" >
+                                        <option value="">Drinks</option>
+                                    </select>
+
+                                    <select name="rank"  class="ui fluid search dropdown"  id = "menu3" form = "reviews" >
+                                        <option value="">Rank</option>
+                                    </select>
+                                    <hr class="w3-clear">
+
                                 </div>
+
                                 <div class="ui fluid action input">
                                     <input type="text" placeholder="comment" name="comment">
-                                    <!--<div class="ui heart rating" data-rating="1" data-max-rating="5"></div>-->
                                     <button type="submit" class="ui teal button">insert review</button>
                                 </div>
                             </form>
