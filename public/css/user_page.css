@@ -1,7 +1,20 @@
-html, body, h1, h4 {font-family: "Open Sans", sans-serif}
+html, body, h1, h4{font-family: "Open Sans", sans-serif}
 body, html {height: 100%}
 .bgimg {
     background-image: url('https://flawless.life/wp-content/uploads/2018/11/i-10-migliori-cocktail-bar-in-porta-venezia-cover.jpg');
     position: relative;
     overflow: scroll;
 }
+#avatar{
+    height:106px;width:106px
+}
+
+#container{
+    max-width:1400px;margin-top:80px
+}
+
+#mySidebar{
+    z-index:3;width:150px;
+    position: relative;
+}
+

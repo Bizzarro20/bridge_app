@@ -6,9 +6,7 @@ body, html {height: 100%}
     background-position: center;
     background-size: cover;
 }
-.button{
-
-    width: 100%;
-}
-
+.button{width: 100%;}
+#bordergrey{margin:auto;width:40%}
+#display{width:35%}
 /*https://stackoverflow.com/questions/44642090/why-cant-i-link-my-css-to-my-ejs-files  da qui preso l'idea separare css e js*/

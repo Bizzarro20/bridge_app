@@ -9,203 +9,159 @@
 
     <title>DrinkAdvisor-UserPage</title>
 
+    <!-- Links per l'utilizzo delle librerie di semantic ui, w3schools e bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
-    <!--for datatable-->
+    <!--per datatable-->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.js"></script>
     <!--- -->
 
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-blue-grey.css">
-    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Open+Sans'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
     <link type="text/css" rel='stylesheet' href='/css/user_page.css' />
     <script src="/script/user_page.js"></script>
-
 </head>
 
-<header class="w3-container w3-center w3-padding-30 w3-white">
+<header class="w3-container w3-center w3-padding-30 w3-white"> <!-- Blocco per l'inserimento del titolo staccato dal resto della pagina-->
+    <br>
     <h1 class="w3-xxxlarge"><b>Drink Advisor</b></h1>
-    <h6>User<span class="w3-tag">Home Page</span></h6>
+    <h3>User <span class="w3-tag">Page</span></h3>
+    <br>
 </header>
 
 
 <body class="bgimg w3-display-container w3-animate-opacity w3-text-blak relative w3-theme-l5">
-<!-- Navbar on small screens -->
-<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" style="z-index:3;width:150px;" id="mySidebar"><br>
-    <div class="w3-container">
-        <h4 class="w3-centre">My Profile</h4>
-        <p class="w3-centre"><img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" style="height:106px;width:106px" alt="Avatar"></p>
+<nav class="w3-sidebar w3-collapse w3-white w3-animate-left" id="mySidebar"><br> <!-- Navbar - barra utente -->
+    <div class="w3-container" >
+        <h3 class="w3-centre">My Profile</h3>
+        <p class="w3-centre"> <img src="https://www.w3schools.com/w3images/avatar3.png" class="w3-circle" id = "avatar"  alt="Avatar"></p>
     </div>
 
-</nav>
-
-<div class="ui secondary menu">
-    <div class="ui item right">
+    <div class="ui item"> <!-- Logout utente -->
         <form action="/logout_user" method="POST">
-            <button type="submit"  class="w3-button w3-block w3-theme-l1 w3-left-align">Logout</button>
+            <button type="submit"  id="logout" class="w3-button w3-block w3-theme-l6">Logout</button>
         </form>
     </div>
-</div>
+</nav>
 
-<div id="navDemo" class="w3-bar-block w3-theme-d2 w3-hide w3-hide-large w3-hide-medium w3-large">
-    <a class="w3-bar-item w3-button w3-padding-large">My Profile</a>
-</div>
+<!-- Contenitore della pagina -->
+<div class="w3-container w3-content " id="container">
 
-<!-- Page Container -->
-<div class="w3-container w3-content " style="max-width:1400px;margin-top:80px">
-    <!-- The Grid -->
-    <div class="w3-row">
-        <!-- Left Column -->
-        <div class="w3-col m3">
-            <!-- Profile -->
-
-            <br>
-
-
-            <br>
-
-        </div>
-
-        <!-- Middle Column -->
-            <div class="w3-col m9">
-                <div class="w3-row-padding">
-                    <div class="w3-col m12">
-                        <div class="w3-card w3-round w3-white">
-                            <div class="w3-container w3-padding">
-                                <h6 class="w3-opacity">Recent Reviews</h6>
-                                <form action="/get_all_reviews" class="ui action left icon input" method="GET">
-                                    <button onclick="f1()" type="submit" class="ui teal button"><i class="fa fa-pencil"></i> Refresh Reviews Page</button>
-                                </form>
-                                <form action="/show_review_of_user" class="ui action left icon input" method="GET">
-                                    <button onclick="f2()" type="submit" class="ui teal button"><i class="fa fa-pencil"></i> My Reviews</button>
-                                </form>
-                                <hr class="w3-clear">
-
-                                <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
-                                <!--- necessari per la separazioni dei contenuti --->
-                                <div id="allreviews"><%=data.reviews%></div>
-                                <div id="userreviews"><%=data.my_reviews%></div>
-
-                                <!--- tabelle che visualizzano i dati renderizzati --->
-                                <table id="table_users_reviews" class="display"></table>
-                                <table id="table_my_reviews" class="display"></table>
-
-                                <hr class="w3-clear">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            <br>
-
-            <div class="w3-row-padding">
-                <div class="w3-col m12">
-                    <div class="w3-card w3-round w3-white">
-                        <div class="w3-container w3-padding">
-                            <h6 class="w3-opacity">Search a Drink</h6>
-
-                            <form action="/search_drink" class="ui action left icon input" method="POST">
-                                <i class="search icon"></i>
-                                <input type="text" class = "w3-border w3-padding" placeholder="What are you looking for?" name="searchdrink">
-                                <button onclick="f3()" type="submit" class="ui teal button"><i class="fa fa-pencil"></i> Search</button>
-                            </form>
-                            <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
-                            <!--- necessari per la separazioni dei contenuti --->
-                            <div id="drinks_for_user"><%=data.lista_drink_user%></div>
-
-                            <table id="table_drink_info_for_user" class="display"></table>
-
-                            <!--gestione caso in cui drink non disponibile nel api-->
-                            <h4 ><%= data.lista_drink_failure_user %> </h4>
-
-                            <hr class="w3-clear">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-
-            <div class="w3-row-padding">
-                <div class="w3-col m12">
-                    <div class="w3-card w3-round w3-white">
-                        <div class="w3-container w3-padding">
-                            <form action="/show_pubs_catalogues_and_info" method="GET">
-                                <button onclick="f4()" type="submit" class="ui teal button">View Pubs Catalogues</button>
-                            </form>
-
-                            <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
-                            <!--- necessari per la separazioni dei contenuti --->
-                            <div id="catalogues"><%=data.pub_catalogues%></div>
-
-                            <table id="table_catalogues" class="display"></table>
-                            <hr class="w3-clear">
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-
-
-            <div class="w3-row-padding">
-                <div class="w3-col m12">
-                    <div class="w3-card w3-round w3-white">
-                        <div class="w3-container w3-padding">
-                            <h6 class="w3-opacity"> Review - please have a look on the drinks in the catalogues before reviewing (you are free to review a drink not in the catalogues yet)</h6>
-                            <hr class="w3-clear">
-                            <form action="/insert_review" method="POST" id="reviews">
-                                <div onclick="f5()" class="ui fluid action input">
-
-                                    <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
-                                    <!--- necessari per la separazioni dei contenuti --->
-                                    <div id="lista_pubs"><%=data.show_pubs%></div>
-
-                                    <!-- MENU recensioni-->
-
-                                    <select name="pub"  class="ui fluid search dropdown"  id = "menu1" form = "reviews" >
-                                        <option value="">Pubs</option>
-                                    </select>
-
-
-                                    <!--cambiare ... non select!! -->
-                                    <select name="drink"  class="ui fluid search dropdown"  id = "menu2" form = "reviews" >
-                                        <option value="">Drinks</option>
-                                    </select>
-
-                                    <select name="rank"  class="ui fluid search dropdown"  id = "menu3" form = "reviews" >
-                                        <option value="">Rank</option>
-                                    </select>
-                                    <hr class="w3-clear">
-
-                                </div>
-
-                                <div class="ui fluid action input">
-                                    <input type="text" placeholder="comment" name="comment">
-                                    <button type="submit" class="ui teal button">insert review</button>
-                                </div>
-                            </form>
-                            <hr>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <br>
-        </div>
-        <!-- End Middle Column -->
+   <!-- colonna sinistra -->
+    <div class="w3-col m2">
+        <!-- Profilo -->
+        <br>
     </div>
 
-</div>
+    <!-- Colonna nel mezzo -->
+    <div class="w3-col m9"> <!-- questo <div> ridimensiona le colonna dei blocchi centrali -->
+          <div class="w3-card w3-round w3-white"> <!-- questo colora i vari blocchi di bianco-->
+              <div class="w3-container w3-padding"> <!-- primo blocco-->
+                  <h6 class="w3-opacity">In this section you can have a look on the reviews made by other users and by you. Moreover, you can have a look on the drinks that are available in each pub. For more information about the drinks, go to the section above. </h6>
 
-<!-- End Grid -->
+                  <form action="/show_review_of_user" class="ui action left icon input" method="GET"> <!--per visualizzare le recenzioni fatte-->
+                      <button onclick="f2()" type="submit" class="ui teal button"><i class="edit icon"></i> My Reviews</button>
+                  </form>
+                  <form action="/show_pubs_catalogues_and_info" class="ui action left icon input" method="GET"> <!--per visualizzare il catalogo dei pubs-->
+                      <button onclick="f4()" type="submit" class="ui teal button"><i class="clipboard list icon"></i>View Pubs Catalogues</button>
+                  </form>
+                  <form action="/get_all_reviews" class="ui action left icon input" method="GET"> <!-- per visualizzare le varie recensioni -->
+                      <button onclick="f1()" type="submit" class="ui teal button"><i class="refresh icon"></i> Refresh Reviews Page</button>
+                  </form>
+
+                  <hr class="w3-clear">
+                  <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
+                  <!--- necessari per la separazioni dei contenuti --->
+                  <div id="allreviews"><%=data.reviews%></div>
+                  <div id="userreviews"><%=data.my_reviews%></div>
+                  <div id="catalogues"><%=data.pub_catalogues%></div>
+
+                  <!--- tabelle che visualizzano i dati renderizzati --->
+                  <table id="table_users_reviews" class="ui teal table"></table>
+                  <table id="table_my_reviews" class="ui teal table"></table>
+                  <table id="table_catalogues" class="ui teal table"></table>
+
+                  <!--gestione caso tabelle vuote-->
+                  <h4 ><%= data.section_one_failure %> </h4>
+                  <hr class="w3-clear">
+              </div>
+          </div><br>
 
 
-<!-- End Page Container -->
+          <div class="w3-card w3-round w3-white">
+              <div class="w3-container w3-padding"> <!--secondo blocco-->
+                  <h6 class="w3-opacity">Search a Drink (you can get more information drinks that are in catalogues or may you heard about it).</h6>
 
+                  <form action="/search_drink" class="ui action left icon input" method="POST"> <!--per cercare i drink-->
+                    <i class="search icon"></i>
+                    <input type="text" class = "w3-border w3-padding" placeholder="Drink..." name="searchdrink">
+                    <button onclick="f3()" type="submit" class="ui teal button"><i class="search icon"></i> Search</button>
+                  </form>
+
+                  <!---div utilizzati come intermediario per inviare i dati renderizzati nel file js --->
+                  <!--- necessari per la separazioni dei contenuti --->
+                  <div id="drinks_for_user"><%=data.lista_drink_user%></div>
+                  <hr class="w3-clear">
+                  <table id="table_drink_info_for_user" class="ui teal table"></table>
+
+                  <!--gestione caso in cui drink non disponibile nel api-->
+                  <h4 ><%= data.lista_drink_failure_user %> </h4>
+                  <hr class="w3-clear">
+              </div>
+          </div><br>
+
+          <div class="w3-card w3-round w3-white">
+              <div class="w3-container w3-padding"> <!-- terzo blocco -->
+                  <h6 class="w3-opacity" id="review">
+                      Review - please have a look on the drinks in the catalogues before reviewing <br>
+                      (you are free to review a drink not in the catalogues yet)</h6>
+                  <hr class="w3-clear">
+
+                  <form action="/insert_review" method="POST" id="reviews"> <!-- inserimento delle recenzioni-->
+                      <div onclick="f5()" class="ui fluid action input">
+
+                          <!-- <div> utilizzati come intermediario per inviare i dati renderizzati nel file js -->
+                          <!-- necessari per la separazioni dei contenuti -->
+                          <div id="lista_pubs"><%=data.show_pubs%></div>
+                          <input type="text" placeholder="drink" name="drink">
+
+                          <!-- MENU recensioni-->
+                          <select name="pub"  class="ui selection small large dropdown" id = "menu1" form = "reviews" >
+                              <option value="" disabled selected >Pubs</option>
+                          </select>
+
+                          <select name="rank"  class="ui selection small dropdown"  id = "menu3" form = "reviews" >
+                              <option value="" disabled selected >Rank</option>
+                          </select>
+
+                          <hr class="w3-clear">
+                      </div>
+
+                      <div class="ui fluid action input">
+                          <input type="text" placeholder="comment" name="comment">
+                          <button type="submit" class="ui teal button">Insert review</button>
+                      </div>
+
+                      <hr class="w3-clear">
+                      <div class="ui mini floating message teal "> <!-- Messaggi di stato-->
+                          <div class="header">
+                              status: <%= data.status %>
+                          </div>
+                      </div>
+                      <hr class="w3-clear">
+                  </form>
+              </div>
+          </div><br>
+    </div> <!-- Fine della colonna centrale -->
+</div> <!-- Fine del contenitore -->
 </body>
 </html>

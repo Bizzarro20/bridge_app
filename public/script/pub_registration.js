@@ -1,6 +1,5 @@
 //GESTIONE LOGIN CON SEGNALAZIONI DI CAMPI INVALIDI
 
-
 $(document)
     .ready(function() {
         $('.ui.form')

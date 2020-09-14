@@ -5,7 +5,7 @@ $.fn.dataTableExt.sErrMode = 'throw';   //necessario per evitare warning persist
 $(document).ready(function f1() {
     let my_pub_reviews1 = document.getElementById("my_pub_reviews").innerText;
     let v1 = my_pub_reviews1.split(",*,");
-    v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2)
+    v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2);
     let my_pub_reviews = v1;
     let dataset_pub = [];
     for (let j = 0; j < my_pub_reviews.length; j += 5) {
@@ -23,7 +23,7 @@ $(document).ready(function f1() {
             ]
         })
     });
-    $('#my_pub_reviews').hide()
+    $('#my_pub_reviews').hide();
 
 
 })
@@ -31,7 +31,7 @@ $(document).ready(function f1() {
 $(document).ready(function f2() {
     let my_pub_catalogue1 = document.getElementById("my_pub_catalogue").innerText;
     let v1 = my_pub_catalogue1.split(",*,");
-    v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2)
+    v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2);
     let my_pub_catalogue = v1;
     let dataset_catalogue = [];
     for (let j = 0; j < my_pub_catalogue.length; j += 2) {
@@ -47,7 +47,7 @@ $(document).ready(function f2() {
         })
     });
 
-    $('#my_pub_catalogue').hide()
+    $('#my_pub_catalogue').hide();
 
 
 })
@@ -55,7 +55,7 @@ $(document).ready(function f2() {
 $(document).ready(function f3() {
     let drink1 = document.getElementById("drink_for_pub").innerText;
     let v1 = drink1.split(",*,");
-    v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2)
+    v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2);
     let drink = v1;
     let dataset_drink = [];
     for (let j = 0; j < drink.length; j += 7) {
@@ -76,7 +76,7 @@ $(document).ready(function f3() {
         })
     });
 
-    $('#drink_for_pub').hide()
+    $('#drink_for_pub').hide();
 
 
 })
@@ -84,7 +84,7 @@ $(document).ready(function f3() {
 $(document).ready(function f4() {
     let my_pub_perf1 = document.getElementById("pub_performance_for_each_drink").innerText;
     let v1 = my_pub_perf1.split(",*,");
-    v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2)
+    v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2);
     let my_pub_perf = v1;
     let dataset_pub_perf = [];
     for (let j = 0; j < my_pub_perf.length; j += 2) {
@@ -100,7 +100,7 @@ $(document).ready(function f4() {
         })
     });
 
-    $('#pub_performance_for_each_drink').hide()
+    $('#pub_performance_for_each_drink').hide();
 
 
 })

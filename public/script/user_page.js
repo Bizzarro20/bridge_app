@@ -5,7 +5,7 @@ $.fn.dataTableExt.sErrMode = 'throw';   //necessario per evitare warning persist
 $(document).ready(function f1() {
         let last_rev1 = document.getElementById("allreviews").innerText;
         let v1 = last_rev1.split(",*,");
-        v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2)
+        v1[v1.length - 1] = v1[v1.length - 1].substring(0, v1[v1.length - 1].length - 2);
         let last_rev = v1;
         let dataset1 = [];
         for (let j = 0; j < last_rev.length; j += 6) {
@@ -24,7 +24,7 @@ $(document).ready(function f1() {
                 ]
             })
         });
-        $('#allreviews').hide()
+        $('#allreviews').hide();
 
 
     })
@@ -32,7 +32,7 @@ $(document).ready(function f1() {
 $(document).ready(function f2() {
     let my_rev1 = document.getElementById("userreviews").innerText;
     let v2 = my_rev1.split(",*,");
-    v2[v2.length - 1] = v2[v2.length - 1].substring(0, v2[v2.length - 1].length - 2)
+    v2[v2.length - 1] = v2[v2.length - 1].substring(0, v2[v2.length - 1].length - 2);
     let my_rev = v2;
     let dataset2 = [];
     for (let j = 0; j < my_rev.length; j += 5) {
@@ -52,13 +52,13 @@ $(document).ready(function f2() {
         })
     });
 
-    $('#userreviews').hide()
+    $('#userreviews').hide();
 })
 
 $(document).ready(function f3() {
-    let drink_user1 = document.getElementById("drinks_for_user").innerText
+    let drink_user1 = document.getElementById("drinks_for_user").innerText;
     let v2 = drink_user1.split(",*,");
-    v2[v2.length - 1] = v2[v2.length - 1].substring(0, v2[v2.length - 1].length - 2)
+    v2[v2.length - 1] = v2[v2.length - 1].substring(0, v2[v2.length - 1].length - 2);
     let drink_user = v2;
 
     let dataset_drink_user = [];
@@ -76,16 +76,16 @@ $(document).ready(function f3() {
             ]
         })
     });
-    $('#drinks_for_user').hide()
+    $('#drinks_for_user').hide();
 
 
 });
 
 
 $(document).ready(function f4() {
-    let catalogues1 = document.getElementById("catalogues").innerText
+    let catalogues1 = document.getElementById("catalogues").innerText;
     let v2 = catalogues1.split(",*,");
-    v2[v2.length - 1] = v2[v2.length - 1].substring(0, v2[v2.length - 1].length - 2)
+    v2[v2.length - 1] = v2[v2.length - 1].substring(0, v2[v2.length - 1].length - 2);
     let catalogues = v2;
 
     let dataset_catalogue = [];
@@ -102,12 +102,12 @@ $(document).ready(function f4() {
             ]
         })
     })
-    $('#catalogues').hide()
+    $('#catalogues').hide();
 
 
 $(document).ready(function f5(){
 
-    let array_pubs1 = document.getElementById("lista_pubs").innerText
+    let array_pubs1 = document.getElementById("lista_pubs").innerText;
 
     let array_pubs = array_pubs1.split(",");  //creo vettore
 
@@ -126,7 +126,7 @@ $(document).ready(function f5(){
         menu3.add(new Option(array_rating[rating]));
     }
     ;
-    $('#lista_pubs').hide()
+    $('#lista_pubs').hide();
 })
 
 

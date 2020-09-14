@@ -10,25 +10,26 @@
 
     <title>Registration</title>
 
+    <!-- Links per l'utilizzo delle librerie di semantic ui, w3schools e bootstrap -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.11.8/semantic.min.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css"/>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.4.1/semantic.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
 
     <link type="text/css" rel='stylesheet' href='/css/pub_registration.css' />
     <script src="/script/pub_registration.js"></script>
+
 </head>
 
 <body>
 <div class="bgimg w3-display-container w3-animate-opacity w3-text-blak relative black">
     <div class="w3-display-middle">
         <h2 class="w3-jumbo w3-animate-top">Register a new PUB</h2>
-        <hr class="w3-border-grey" style="margin:auto;width:40%">
+        <hr class="w3-border-grey"  id ="bordergrey">
 
-        <form action="/pub_register" method="POST" class="ui large form">
+        <form action="/pub_register" method="POST" class="ui large form"> <!-- Registrazione degi Pubs-->
             <div class=" w3-hover-opacity-off w3-padding-large w3-round-large">
                 <div class="field">
                     <div class="ui left icon input">
@@ -53,19 +54,14 @@
 
             </div>
             <button class="ui  inverted grey basic button" id="registration">Register</button>
-            <div class="ui error message"></div>
+            <div class="ui error message"></div> <!-- Messaggi di errore in caso di inserimenti di dati sbagliati-->
         </form>
         <hr>
-        <form action="/" method="GET">
+        <form action="/" method="GET"> <!--Ritorno nella login page-->
             <button class="ui icon button basic ">Back to login page <i class="sign out alternate icon"></i></button>
         </form>
-
-
     </div>
 </div>
 
-<div>
-    <h4 > result: <%= data.status %> </h4>
-</div>
 </body>
 </html>
